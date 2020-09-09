@@ -106,3 +106,44 @@ get().then(values => console.log(values)) // [1, 2, 3]
 
 1. 타입 주석과 타입 추론
 
+```typescript
+let n: number = 1
+let m = 2
+```
+
+* 변수 n 뒤에 콜론 : 고 타입이 있음. 이를 타입 주석(type annotation)이라고 함
+* 변수 m 처럼 타입을 생략 할 수 있음. 오른쪽 값을 보고 왼쪽의 변수 타입을 정함. 이를 타입 추론(type inference) 라고 함
+* 타입 추론 덕분에 .js 파일을 단지 .ts파일로 바꾸면 타입스크립트 환경에서 작동함
+
+2. 인터페이스
+
+생략
+
+3. 튜플
+
+* 배열에 저장되는 아이템의 데이터 타입이 다름
+
+```typescript
+let tuple: [boolean, number, string] = [true, 1, 'ok']
+```
+
+4. 제네릭 타입
+
+* 다양한 타입을 한꺼번에 취급할 수 있게 함
+* C++의 템플릿과 유사함
+
+5. 대수 타입
+
+* ADT는 추상 데이터 타입(abstract data type)을 의미하기도 하지만 대수 타입(algebraic data type)의미로도 자주 사용됨
+* 대수 타입은 다른 자료형을 갖는 자료형
+* 크게 합집합 타입(union, sum type), 교집합 타입(intersection, product type) 두가지가 있음
+* 합집합은 |, 교집합은 &을 사용해 여러 타입 만들 수 있음
+
+```typescript
+type NumberOrString = number | string //합집합 타입 예
+type AnimalAndPeson = Animal &  Person //교집합 타입 예
+```
+
+## 01-3 타입스크립트 개발 환경 만들기
+
+생략
