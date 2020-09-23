@@ -80,3 +80,35 @@ class 구현클래스 implements Iterable<생성할 값의 타입>{}
 [Symbol.iterator](): Iterator<생성할 값의 타입>{}
 ```
 
+
+
+## 06-2 생성기 이해하기
+
+* ESNext 자바스크립트는 yield 키워드 제공함
+* yield 키워드는 function* 키워드 사용한 함수만 호출 가능
+* 이렇게 만들어진 함수를 생성기(generator) 라고 함
+
+#### setInterval 함수와 생성기의 유사성
+
+* 생성기가 동작하는 방식을 '세미코루틴' 이라고 함
+* 타입스크립트와 같이 단일 스레드로 동작하는 언어가 다중 스레드로 보이는 것처럼 동작
+* setInterval 함수는 지정한 주기로 콜백 함수를 호출
+
+```typescript
+const intervalID = setInterval(콜백함수, 호출 주기)
+//무한히 반복하는 setInterval 함수를 중지
+clearInterval(intervalId)
+```
+
+#### function* 키워드
+
+* Function* 키워드로 함수를 선언
+* 함수 몸통에 yield 문이 있음
+* Function*은 화살표 함수로 만들수 없음
+
+#### yield 키워드
+
+* 반복기를 자동으로 만듬
+* 반복기 제공자 역할도 수행
+
+#### 이후 생략
