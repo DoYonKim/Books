@@ -6,6 +6,7 @@ import ChildComponent from './03/ChildComponent'
 import BooleanComponent from './03/BooleanComponent';
 import ChildComponent2 from './03/ChildComponent2';
 import DefaultPropscomponent from './03/DefaultPropscomponent';
+import StateExample from './03/StateExample';
 
 function App() {
 
@@ -43,6 +44,7 @@ function App() {
       <div>
         <DefaultPropscomponent />
       </div>
+      <div><StateExample/></div>
     </div>
     
   );
