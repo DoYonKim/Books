@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class StateExample extends Component {
 
-    constructor(props) {
+    constructor(props){
         super(props);
 
         this.state = {
@@ -12,9 +12,9 @@ class StateExample extends Component {
 
     this.handleData = this.handleData.bind(this);
 
-    setTimeout(this.handleData, 4000);
-
-    };
+    setTimeout(this.handleData,4000);
+    
+    }
 
     handleData(){
         const data = 'new data';
@@ -25,9 +25,8 @@ class StateExample extends Component {
             formData: data + formData,
         });
 
-        console.log('loading값 ', this.state.loading);
+        console.log('loading값', this.state.loading);
     }
-
     render() {
         return (
             <div>
