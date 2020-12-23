@@ -7,6 +7,7 @@ import Quiz112 from "./03/Quiz112";
 import LifeCycle from "./03/LifeCycle";
 import Chap0308ListExample from "./03/Chap0308ListExample"
 import Counter from "./03/Counter2"
+import Chap0309ScrollSpy from "./03/Chap0309ScrollSpy"
 class App extends Component {
 
   constructor(props){
@@ -33,6 +34,7 @@ class App extends Component {
         <LifeCycle/>
         <Chap0308ListExample/>
         <Counter count = {this.state.count} onAdd = {this.increaseCount}/>
+        <Chap0309ScrollSpy/>
       </div>
     );
   }
