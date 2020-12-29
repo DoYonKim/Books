@@ -39,7 +39,7 @@ class Input extends PureComponent {
                 value={value}
                 type={type}
             />
-            <label className="active" for = {`input_${name}`}>{label}</label>
+            <label className="active" children = {`input_${name}`}>{label}</label>
             {errorMessage && <span className="helper-text" data-error={errorMessage}>{errorMessage}</span>}
         </div>
     );

@@ -4,7 +4,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$\,
+                test: /\.scss$/,
                 loaders: ["sass-loader"],
                 include: path.resolve(__dirname,"../")
             }
