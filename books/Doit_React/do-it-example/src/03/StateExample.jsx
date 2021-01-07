@@ -24,8 +24,6 @@ class StateExample extends Component {
             loading: false,
             formData: data + formData,
         });
-
-        console.log('loading값', this.state.loading);
     }
     render() {
         return (

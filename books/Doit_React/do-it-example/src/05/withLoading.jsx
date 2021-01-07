@@ -6,7 +6,6 @@ export default (loadingMessage = '로딩중') => WrappedComponent => {
 
   function WithLoading({ isLoading, ...props }) {
 
-    console.log(props);
     if (isLoading) {
         
       return props.loadingMessage || loadingMessage;
