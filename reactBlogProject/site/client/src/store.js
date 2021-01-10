@@ -1,10 +1,8 @@
-import { isMoment } from 'moment';
 import {createStore, compose, applyMiddleware} from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import {createBrowserHistory} from 'history';
 import {routerMiddleware} from 'connected-react-router';
 
-import createRootDeducer from './redux/reducers/index';
 import rootSaga from './redux/sagas'
 import createRootReducer from './redux/reducers/index';
 

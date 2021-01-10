@@ -12,7 +12,7 @@ const Footer = () => {
 
     return (
         <FooterArea>
-            <Row>
+            <Row className = "mr-0">
                 <Col>
                     <p>
                         Copyright  &copy; <span>{thisYear()}</span>
@@ -27,7 +27,6 @@ const Footer = () => {
 const FooterArea = styled.div`
     background-color: yellow;
     text-align: center;
-    margin: 0 auto;
     padding: 0.5rem;
 `;
 
