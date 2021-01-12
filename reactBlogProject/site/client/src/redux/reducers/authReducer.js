@@ -1,4 +1,4 @@
-import { CLEAR_ERROR_FAILURE, CLEAR_ERROR_REQUEST, CLEAR_ERROR_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE } from '../types'
+import { CLEAR_ERROR_FAILURE, CLEAR_ERROR_REQUEST, CLEAR_ERROR_SUCCESS, LOGIN_FAILURE, LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT_REQUEST, LOGOUT_SUCCESS, LOGOUT_FAILURE, USER_LOADING_REQUEST, USER_LOADING_SUCCESS, USER_LOADING_FAILURE, REGISTER_REQUEST, REGISTER_SUCCESS, REGISTER_FAILURE } from '../types'
 
 const initialState = {
     token: localStorage.getItem('token'),
@@ -19,6 +19,7 @@ const authReducer = (state = initialState, action) => {
     
         case LOGOUT_REQUEST:
         case LOGIN_REQUEST:
+        case REGISTER_REQUEST:
             return {
                 ...state,
                 errorMsg: "",
@@ -26,6 +27,7 @@ const authReducer = (state = initialState, action) => {
         }
 
         case LOGIN_SUCCESS:
+        case REGISTER_SUCCESS:
             localStorage.setItem("token", action.payload.token);
 
             return {
@@ -53,6 +55,7 @@ const authReducer = (state = initialState, action) => {
 
         case LOGOUT_FAILURE:
         case LOGIN_FAILURE:
+        case REGISTER_FAILURE:
             localStorage.removeItem("token");
 
             return {
@@ -85,6 +88,34 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 errorMsg: null
+        }
+
+        case USER_LOADING_REQUEST:
+
+            return {
+                ...state,
+                isLoading: true
+        }
+
+        case USER_LOADING_SUCCESS:
+
+            return {
+                ...state,
+                isAuthenticated: true,
+                isLoading: false,
+                user: action.payload,
+                userId: action.payload._id,
+                userName: action.payload.name,
+                userRole: action.payload.role
+        }
+        case USER_LOADING_FAILURE:
+
+            return {
+                ...state,
+                errorMsg: null,
+                isAuthenticated: false,
+                isLoading: false,
+                userRole: ""
         }
 
         default:

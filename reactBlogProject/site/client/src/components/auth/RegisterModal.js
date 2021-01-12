@@ -35,14 +35,14 @@ const RegisterModal = () =>{
     const onChange = (e) => {
         setValue({
             ...form,
-            [e.target.name]: e.target.setValue,
+            [e.target.name]: e.target.value,
         });
     };
 
     const onSubmit = (e) => {
         e.preventDefault();
         const {name, email, password} = form;
-        const newUser = {name, email};
+        const newUser = {name, email, password};
         console.log(newUser, "newUser");
         dispatch({
             type: REGISTER_REQUEST,
@@ -61,7 +61,7 @@ const RegisterModal = () =>{
                     Register
                 </ModalHeader>
                 <ModalBody>
-                    {localMsg ? <Alert color = "danger">dd</Alert> : null}
+                    {localMsg ? <Alert color = "danger">{localMsg}</Alert> : null}
                     <Form  onSubmit = {onSubmit}>
                         <FormGroup>
                             <Label for = "name">Name</Label>
@@ -75,7 +75,7 @@ const RegisterModal = () =>{
                             <Label for = "email">Email</Label>
                             <Input 
                                 type = "email"
-                                name = "eamil"
+                                name = "email"
                                 id = "email"
                                 placeholder = "Email"
                                 onChange = {onChange}

@@ -1,5 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
-import { Collapse, Container, Navbar, NavbarToggler , Nav, NavLink, Form, NavItem, Button} from 'reactstrap';
+import { Collapse, Container, Navbar, NavbarToggler , Nav, Form, NavItem, Button} from 'reactstrap';
 import styled from "styled-components";
 import {Link} from "react-router-dom";
 
@@ -42,19 +42,19 @@ const AppNavbar = () =>{
 
     const authLink = (
             <Fragment>
-                <NavLink>
-                    {userRole == "MainJuin" ? (
-                        <Form className = "col mt-2">
+                <NavItem>
+                    {userRole === "MainJuin" ? (
+                        <Form className = "col ">
                             <Link to = "post" className = "btn btn-success block text-white px-3" onClick = {addPostClick}>
                                 Add Post
                             </Link>
                         </Form>
                     ) : ""}
-                </NavLink>
+                </NavItem>
                 <NavItem className = "d-flex justify-content-center">
-                    <Form className = "col mt-2">
+                    <Form className = "col ">
                         {user && user.name ? (
-                            <Link>
+                            <Link to = "/" >
                                 <Button outline color = "light" className = "px-3" block>
                                     <strong>{user ? `Welcome ${user.name}` : ""}</strong>
                                 </Button>
@@ -69,7 +69,7 @@ const AppNavbar = () =>{
                 <NavItem>
                     <Form className = "col">
                         <Link onClick = {onLogout} to ="#" className = "">
-                            <Button outline color="light" className = "mt-2" block>
+                            <Button outline color="light" className = "" block>
                                 logout
                             </Button>
                         </Link>
