@@ -1,18 +1,11 @@
 import React, { Fragment, useCallback, useEffect, useState } from 'react';
 import { Collapse, Container, Navbar, NavbarToggler , Nav, Form, NavItem, Button} from 'reactstrap';
-import styled from "styled-components";
 import {Link} from "react-router-dom";
 
 import LoginModal from "../components/auth/LoginModal"
 import { useDispatch, useSelector } from 'react-redux';
 import { LOGOUT_REQUEST } from '../redux/types';
 import RegisterModal from './auth/RegisterModal';
-
-const AppNavbarDiv = styled.div`
-    //background-color: yellow;
-    /* text-align: center;
-    padding: 0.5rem; */
-`;
 
 const AppNavbar = () =>{
 
@@ -90,26 +83,23 @@ const AppNavbar = () =>{
         );
 
     return(
-        <AppNavbarDiv>
-            <Navbar color = "dark" dark expand= "lg" className ="sticky-top">
-                <Container>
-                    <Link to = "/" className= "text-white text-decoration-none" >
-                        DY 리액트 블로그
-                    </Link>
-                    <NavbarToggler onClick = {handleToggle}/>
-                    <Collapse isOpen={isOpen} navbar>
-                        <Nav className = "ml-auto d-flex justify-content-around" navbar>
-                            {isAuthenticated ? (
-                                authLink
-                            )  : (
-                                guestLink
-                            )}
-                        </Nav>
-                    </Collapse>
-                </Container>
-            </Navbar>
-        </AppNavbarDiv>
-        
+        <Navbar color = "dark" dark expand= "lg" className ="sticky-top">
+            <Container>
+                <Link to = "/" className= "text-white text-decoration-none" >
+                    DY 리액트 블로그
+                </Link>
+                <NavbarToggler onClick = {handleToggle}/>
+                <Collapse isOpen={isOpen} navbar>
+                    <Nav className = "ml-auto d-flex justify-content-around" navbar>
+                        {isAuthenticated ? (
+                            authLink
+                        )  : (
+                            guestLink
+                        )}
+                    </Nav>
+                </Collapse>
+            </Container>
+        </Navbar>        
     );
 };
 

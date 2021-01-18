@@ -12,7 +12,7 @@ const postSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    vies: {
+    views: {
         type: Number,
         default: -2,
     },
