@@ -25,9 +25,10 @@ const Footer = () => {
 };
 
 const FooterArea = styled.div`
-    background-color: yellow;
+    background-color: #272c31;
     text-align: center;
     padding: 0.5rem;
+    color: white;
 `;
 
 export default Footer;
