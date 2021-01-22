@@ -1,23 +1,17 @@
 import React, {PureComponent} from 'react';
 import {Provider} from 'react-redux';
 import configureStore from './configureStore';
+import {setLoading, resetLoading} from './actions/loadingActions'
+import {setUser} from './actions/userActions'
 
 class ReduxApp extends PureComponent {
     
     store = configureStore({loading: false});
 
     componentDidMount() {
-        this.store.dispatch({
-          type: 'SET_LOADING',
-          payload: true,
-        });
-        this.store.dispatch({
-          type: 'RESET_LOADING',
-        });
-        this.store.dispatch({
-          type: 'SET_USER',
-          payload: { name: 'Park', age: 20 },
-        });
+        this.store.dispatch(setLoading(true));
+        this.store.dispatch(resetLoading());
+        this.store.dispatch(setUser({name: 'Park', age: 20}));
     }
 
     render(){
