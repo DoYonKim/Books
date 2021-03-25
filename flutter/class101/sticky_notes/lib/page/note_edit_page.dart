@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sticky_notes/data/note.dart';
+import 'package:sticky_notes/providers.dart';
 
 class NoteEditPage extends StatefulWidget {
 
@@ -7,8 +8,9 @@ class NoteEditPage extends StatefulWidget {
   State createState() => _NoteEditPageState();
 }
 
-class _NoteEditPageState extends State<NoteEditPage>{
+class _NoteEditPageState extends State<NoteEditPage> {
 
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   String title;
   String body;
   Color color;
@@ -16,14 +18,20 @@ class _NoteEditPageState extends State<NoteEditPage>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
         title: Text('노트 편집'),
         actions: [
           IconButton(
-              icon: Icon(Icons.color_lens),
-              tooltip: '배경 선택',
-              onPressed: _displayColorSelectionDialog,
+            icon: Icon(Icons.color_lens),
+            tooltip: '배경 선택하기',
+            onPressed: _displayColorSelectionDialog,
           ),
+          IconButton(
+              icon: Icon(Icons.save),
+              tooltip: '저장',
+              onPressed: _saveNote
+          )
         ],
       ),
       body: SizedBox.expand(
@@ -41,7 +49,7 @@ class _NoteEditPageState extends State<NoteEditPage>{
                   ),
                   maxLines: 1,
                   style: TextStyle(fontSize: 20.0),
-                  onChanged: (text){
+                  onChanged: (text) {
                     title = text;
                   },
                 ),
@@ -55,7 +63,7 @@ class _NoteEditPageState extends State<NoteEditPage>{
                   ),
                   maxLines: null,
                   keyboardType: TextInputType.multiline,
-                  onChanged: (text){
+                  onChanged: (text) {
                     body = text;
                   },
                 ),
@@ -66,12 +74,12 @@ class _NoteEditPageState extends State<NoteEditPage>{
       ),
     );
   }
-  
-  void _displayColorSelectionDialog(){
+
+  void _displayColorSelectionDialog() {
     //소프트키보드 내리기.
     FocusManager.instance.primaryFocus.unfocus();
-    
-    showDialog(context: context, builder: (context){
+
+    showDialog(context: context, builder: (context) {
       return AlertDialog(
         title: Text('배경색 선택'),
         content: Column(
@@ -111,11 +119,28 @@ class _NoteEditPageState extends State<NoteEditPage>{
       );
     });
   }
-  
-  void _applyColor(Color newColor){
+
+  void _applyColor(Color newColor) {
     setState(() {
       Navigator.pop(context);
       color = newColor;
     });
+  }
+
+  void _saveNote() {
+    if (body != null && body.isNotEmpty) {
+      noteManager().addNote(
+        Note(
+            body,
+            title: title,
+            color: color
+        )
+      );
+    }else{
+      scaffoldKey.currentState.showSnackBar(SnackBar(
+        content: Text('노트를 입력하세요.'),
+        behavior: SnackBarBehavior.floating,
+      ));
+    }
   }
 }
