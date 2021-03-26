@@ -3,6 +3,8 @@ import 'package:sticky_notes/data/note.dart';
 
 class NoteListPage extends StatefulWidget {
 
+  static const routeName = '/edit';
+
   @override
   State createState() => _NoteListpageState();
 
