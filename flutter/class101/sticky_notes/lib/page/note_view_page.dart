@@ -65,7 +65,7 @@ class _NoteViewPageState extends State<NoteViewPage> {
         }else{
           appBar = AppBar();
           body = Center(
-            child: Text('오류가 발생했습니다.뷰페이지.'),
+            child: Text('오류가 발생했습니다.'),
           );
         }
         return Scaffold(

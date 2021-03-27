@@ -12,12 +12,12 @@ class NoteManager {
 
   Future<void> addNote(Note note) async {
     Database db = await _getDatabase();
-    db.insert(Note.tableName, note.toRow());
+    await db.insert(Note.tableName, note.toRow());
   }
 
   Future<void> deleteNote(int id) async {
     Database db = await _getDatabase();
-    db.delete(
+    await db.delete(
       Note.tableName,
       where: '${Note.columnId} = ?',
       whereArgs: [id],
@@ -31,13 +31,12 @@ class NoteManager {
       where: '${Note.columnId} = ?',
       whereArgs: [id],
     );
-    return Note.fromRow((rows.single));
+    return Note.fromRow(rows.single);
   }
 
   Future<List<Note>> listNotes() async {
     Database db = await _getDatabase();
     List<Map<String, dynamic>> rows = await db.query(Note.tableName);
-    debugPrint('query result: $rows');
     return rows.map((row) => Note.fromRow(row)).toList();
   }
 
@@ -48,7 +47,7 @@ class NoteManager {
     Color color,
   }) async {
     Database db = await _getDatabase();
-    db.update(
+    await db.update(
       Note.tableName,
       Note(
         body,
@@ -66,9 +65,8 @@ class NoteManager {
   Future<Database> _getDatabase() async {
     if (_database == null) {
       _database = await _init();
-    } else {
-      return _database;
     }
+    return _database;
   }
 
   Future<Database> _init() async {

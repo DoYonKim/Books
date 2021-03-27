@@ -23,15 +23,12 @@ class _NoteListPageState extends State<NoteListPage> {
         future: noteManager().listNotes(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            debugPrint('waiting: ${snapshot.connectionState}');
             return Center(
               child: CircularProgressIndicator(),
             );
           }
 
           if (snapshot.hasData) {
-            debugPrint('hasData: ${snapshot.connectionState}');
-            debugPrint('hasData2: ${snapshot.data}');
             List<Note> notes = snapshot.data;
 
             return GridView.builder(
@@ -47,8 +44,6 @@ class _NoteListPageState extends State<NoteListPage> {
             );
           }
 
-          debugPrint('snapshot: ${snapshot.connectionState}');
-          debugPrint('snapshot: ${snapshot.data}');
           return Center(
             child: Text('오류가 발생했습니다.'),
           );
