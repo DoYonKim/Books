@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Note {
+  static const newNoteId = -1;
 
   static const colorDefault = Colors.white;
 
@@ -14,15 +15,46 @@ class Note {
 
   static const colorBlue = Color(0xFFBBDEFB);
 
+  static const tableName = 'notes';
+
+  static const columnId = 'id';
+
+  static const columnTitle = 'title';
+
+  static const columnBody = 'body';
+
+  static const columnColor = 'color';
+
+  int id;
 
   String title;
+
   String body;
 
   Color color;
 
   Note(
-      this.body, {
-        this.title = '',
-        this.color = colorDefault,
-      });
+    this.body, {
+    this.id = newNoteId,
+    this.title = '',
+    this.color = colorDefault,
+  });
+
+  Note.fromRow(Map<String, dynamic> row)
+      : this(
+          row[columnBody],
+          id: row[columnId],
+          title: row[columnTitle],
+          color: Color(
+            row[columnColor],
+          ),
+        );
+
+  Map<String, dynamic> toRow() {
+    return {
+      columnTitle: this.title,
+      columnBody: this.body,
+      columnColor: this.color.value,
+    };
+  }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sticky_notes/data/note_view_page.dart';
+import 'package:sticky_notes/page/note_view_page.dart';
 import 'package:sticky_notes/page/note_edit_page.dart';
 import 'package:sticky_notes/page/note_list_page.dart';
 
@@ -8,6 +8,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
