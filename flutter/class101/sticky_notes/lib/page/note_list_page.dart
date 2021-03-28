@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:sticky_notes/data/note.dart';
 import 'package:sticky_notes/page/note_edit_page.dart';
 import 'package:sticky_notes/page/note_page_args.dart';
@@ -13,6 +14,20 @@ class NoteListPage extends StatefulWidget {
 }
 
 class _NoteListPageState extends State<NoteListPage> {
+  BannerAd _banner;
+
+  @override
+  void initState() {
+    super.initState();
+    adHelper().loadBanner((ad) {
+      if (_banner == null) {
+        setState(() {
+          _banner = ad;
+        });
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,7 +46,7 @@ class _NoteListPageState extends State<NoteListPage> {
           if (snapshot.hasData) {
             List<Note> notes = snapshot.data;
 
-            return GridView.builder(
+            GridView noteGrid = GridView.builder(
               padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
               itemCount: notes.length,
               itemBuilder: (context, index) {
@@ -42,6 +57,25 @@ class _NoteListPageState extends State<NoteListPage> {
                 childAspectRatio: 1,
               ),
             );
+
+            if (_banner != null) {
+              return SafeArea(
+                child: Column(
+                  children: [
+                    Expanded(child: noteGrid),
+                    Container(
+                      width: _banner.size.width.toDouble(),
+                      height: _banner.size.height.toDouble(),
+                      child: AdWidget(
+                        ad: _banner,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return noteGrid;
+            }
           }
 
           return Center(
@@ -49,16 +83,28 @@ class _NoteListPageState extends State<NoteListPage> {
           );
         },
       ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add),
-        tooltip: '새 노트',
-        onPressed: () {
-          Navigator.pushNamed(context, NoteEditPage.routeName).then((value) {
-            setState(() {});
-          });
-        },
+      floatingActionButton: Padding(
+        padding: _banner != null
+            ? adHelper().getFabPadding(context)
+            : EdgeInsets.zero,
+        child: FloatingActionButton(
+          child: Icon(Icons.add),
+          tooltip: '새 노트',
+          onPressed: () {
+            Navigator.pushNamed(context, NoteEditPage.routeName).then((value) {
+              setState(() {});
+            });
+          },
+        ),
       ),
     );
+  }
+
+
+  @override
+  void dispose() {
+    adHelper().dispose();
+    super.dispose();
   }
 
   Widget _buildCard(Note note) {

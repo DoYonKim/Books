@@ -22,6 +22,13 @@ class _NoteEditPageState extends State<NoteEditPage> {
 
   bool isEdited = false;
 
+
+  @override
+  void initState() {
+    super.initState();
+    adHelper().loadInterstitial();
+  }
+
   @override
   Widget build(BuildContext context) {
     NotePageArgs args = ModalRoute.of(context).settings.arguments;
@@ -179,6 +186,7 @@ class _NoteEditPageState extends State<NoteEditPage> {
         );
       }
 
+      adHelper().showInterstitial();
       Navigator.pop(context);
     } else {
       scaffoldKey.currentState.showSnackBar(
